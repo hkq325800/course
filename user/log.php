@@ -26,7 +26,7 @@ if($_POST['submit']){
 	//print_r($sql);
 	$query = $db->prepare($sql);
 	$query->bindValue(':username',$name,PDO::PARAM_STR);
-	$query->bindValue(':password',$pwd,PDO::PARAM_STRf);
+	$query->bindValue(':password',$pwd,PDO::PARAM_STR);
 	$query->execute();
 	$post = $query->fetchObject();
 	//$query=mysql_query($sql);
@@ -35,7 +35,7 @@ if($_POST['submit']){
 	if(isset($name)){
  		echo "成功";
  		$_SESSION['user']=$name;
- 		redirect_to("../posts/index.php");
+ 		redirect_to("../");
  		exit;
  	}
 

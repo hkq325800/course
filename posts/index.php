@@ -30,12 +30,12 @@ $query = $pager->query($_GET['page']);
   //$_SESSION['user']='hkq';
   if(is_login()) echo '当前用户: ' . current_user()->user_name ;
   else echo '当前用户: 未登录 ' ;//redirect_to("../user/login.php");之后修改
-  ?><a href="../user/signin.php">注册</a>
-    <a href="../user/login.php">登录</a>
-    <a href="../user/logout.php">退出</a>
+  ?><a href="../user/signin.php" <?php if(is_login()) echo 'style="display:none"' ?> >注册</a>
+    <a href="../user/login.php" <?php if(is_login()) echo 'style="display:none"' ?>    >登录</a>
+    <a href="../user/logout.php" <?php if(!is_login()) echo 'style="display:none"' ?>    >退出</a>
   <table border=0 align="center">
     <caption><h1 align="center">帖子列表</h1>
-    <a href="new.php">发帖</a>
+    <a href="new.php" <?php if(!is_login()) echo 'style="display:none"' ?> >发帖</a>
     </caption>
     <thead>
       <tr>

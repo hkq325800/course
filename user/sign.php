@@ -21,6 +21,7 @@ if($_POST['password1'] == $_POST['password2']){
 		if (!$query->execute()) {	
 			print_r($query->errorInfo());
 		}else{
+			$_SESSION['user']=$name;
 			redirect_to("../");
 		};
 	}

@@ -10,7 +10,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . '/course/inc/session.php' ;
   logout();
   //echo $_SESSION['user'];
-  redirect_to("../user/login.php");
+  redirect_to("../posts/index.php");
 ?>
   
 </body>
