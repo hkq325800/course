@@ -1,0 +1,13 @@
+{
+    "name": "afly/phpblog",
+    "require": {
+        "illuminate/database": "~4.2",
+         "philo/laravel-blade": "2.*"
+    },
+    "authors": [
+        {
+            "name": "hkq325800",
+            "email": "hkq325800@163.com"
+        }
+    ]
+}

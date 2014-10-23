@@ -10,7 +10,6 @@ error_reporting(E_ALL^E_NOTICE);
 //echo Capsule::table('posts')->count();
 //class Post extends Illuminate\Database\Eloquent\Model {}
 //echo Post::all()->count();
-//require_once '../inc/pager.php';
 
 $pager = new Pager('select * from posts ');
 $query = $pager->query($_GET['page']);

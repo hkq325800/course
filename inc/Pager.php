@@ -51,6 +51,7 @@ class Pager{
 	}
 
 	public function nav_html($value=''){
+		//{$_SERVER['SCRIPT_NAME']}=http://localhost/course/posts/index.php
 		$query_str = "{$_SERVER['SCRIPT_NAME']}?" ;
 		//??????????
 		$arr = [
