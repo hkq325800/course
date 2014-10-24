@@ -1,27 +1,27 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpblog/inc/db.php' ;
+require_once $_SERVER['DOCUMENT_ROOT'] . '/course/inc/db.php' ;
 /**
 * 
 */
 class Pager{
 	public $page_size,$page_holder;
 	public $page_start,$page_last,$page_current,$page_previous,$page_next;
-	public $sql;
+	public $query;
 
 	//构造函数
-	function __construct($sql,$page_size=2,$page_holder='page'){
+	function __construct($query,$page_size=2,$page_holder='page'){
 		//全局变量与局部变量的区别
 		global $db;
 
 		$this->page_start = 1;
 		$this->page_holder = $page_holder;  
 		$this->page_size = $page_size;  
-		$this->sql = $sql;  
+		$this->query = $query;  
 
-		$sql_amount = 'select count(*) as amount  ' . substr($sql, strpos($sql,'from' ) ) ;
+		//$sql_amount = 'select count(*) as amount  ' . substr($query, strpos($query,'from' ) ) ;
 		//计算总记录数
-		$row_amount = $db->query($sql_amount)->fetchObject()->amount;
-
+		//$row_amount = $db->query($sql_amount)->fetchObject()->amount;
+		$row_amount=$query->count();
 		//计算总页数	
 		$this->page_last = ceil($row_amount / $page_size);
 	}
@@ -44,16 +44,16 @@ class Pager{
 
 		//计算返回纪录的起点与记录数
 		$row_base= ($this->page_current-1) * $this->page_size;
-		$page_sql = " LIMIT {$this->page_size} OFFSET {$row_base}";
-		$sql = $this->sql .  $page_sql;
-		return $db->query($sql);
+		//$page_sql = " LIMIT {$this->page_size} OFFSET {$row_base}";
+		//$sql = $this->sql .  $page_sql;
+		//return $db->query($sql);
+		return $this->query->take($this->page_size)->skip($row_base);
 
 	}
 
 	public function nav_html($value=''){
 		//{$_SERVER['SCRIPT_NAME']}=http://localhost/course/posts/index.php
 		$query_str = "{$_SERVER['SCRIPT_NAME']}?" ;
-		//??????????
 		$arr = [
 			'page_first' =>'page_start',
 			'page_previous'=>'page_previous',
@@ -61,14 +61,15 @@ class Pager{
 			'page_last'=>'page_last'
 		];
 		
+		
 		//as $_GET or $_POST
 		$params = $_REQUEST;
 		foreach ($arr as $key => $value) {
-			$params[$this->page_holder] = $this->$value;	
+			$params[$this->page_holder] = $this->$value;//$this->$value=1024
 			$key .= '_q';
 			$$key =  $query_str . http_build_query($params);
 		}
-		//?????????????????
+		//通过$key拼凑字符串赋给$$key 即$page_first_q等
 		$shouye ='<a href='.$page_first_q.'>首 </a>';
 		$shangye='<a href='.$page_previous_q.'>上 </a>';
 		$xiaye='<a href='.$page_next_q.'>下 </a>';
