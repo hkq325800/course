@@ -13,11 +13,11 @@
 <body background="img/1.jpg">
 <div id='page'>
 	<div id='main'>
-		@yield('content')	
+		<?php echo $__env->yieldContent('content'); ?>	
 	</div>
 	<div id='siderbar'>
-		@section('siderbar')
+		<?php $__env->startSection('siderbar'); ?>
 			this is default siderbar
-		@show
+		<?php echo $__env->yieldSection(); ?>
 	</div>
 </body></html>
