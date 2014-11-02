@@ -1,0 +1,4 @@
+<p> hello <?php echo $name; ?>! </p>
+<p> hello <?php echo e($name); ?>! </p>
+<p> hello {{$name}}! </p>
+<p> hello <?php echo e(isset($name) ? $name : '访客'); ?>! </p>

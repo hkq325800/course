@@ -1,36 +1,7 @@
-<?php 
-require_once '../inc/common.php';
-require_once '../inc/session.php';
-//require_once '../inc/db.php';
-//require_once '../inc/orm.php';
+@extends('layout.master')  
 
-/* Report all errors except E_NOTICE */
-error_reporting(E_ALL^E_NOTICE);
-
-//use Illuminate\Database\Capsule\Manager as Capsule;
-//echo Capsule::table('posts')->count();
-//class Post extends Illuminate\Database\Eloquent\Model {}
-//echo Post::all()->count();
-
-//echo PostModel::all()->count();
-
-//$pager = new Pager('select * from posts ');
-//$query = $pager->query($_GET['page']);
-
-//pass a eloquent relation
-$pager = new Pager(PostModel::select('*'));
-$posts = $pager->query($_GET['page'])->get();
-//$pager2 = new Pager('select * from users ',2,'page2');
-//$query2 = $pager2->query($_GET['page2']);
-?>
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>首页 - 博客</title>
-</head>
-
-<body background="./../img/1.jpg">
+@section('content')
+  @include('notice')
   <?php 
   //先假设session已传入为hkq
   //$_SESSION['user']='hkq';
@@ -67,7 +38,7 @@ $posts = $pager->query($_GET['page'])->get();
 
         foreach($posts as $post)
         //while ( $post =  $query->fetchObject() ) //whilefetchObject
-		{
+    {
           //下方post指fetchObject传回的id、title、body、created_at
       ?>
           <tr>
@@ -87,5 +58,3 @@ $posts = $pager->query($_GET['page'])->get();
   <?php echo $pager->nav_html(); ?> 
 </body>
 </html>
-
-

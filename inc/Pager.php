@@ -61,11 +61,10 @@ class Pager{
 			'page_last'=>'page_last'
 		];
 		
-		
 		//as $_GET or $_POST
 		$params = $_REQUEST;
 		foreach ($arr as $key => $value) {
-			$params[$this->page_holder] = $this->$value;//$this->$value=1024
+			$params[$this->page_holder] = $this->$value;//$this->$value=1024?????page_holder?????params????
 			$key .= '_q';
 			$$key =  $query_str . http_build_query($params);
 		}
