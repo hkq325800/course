@@ -8,15 +8,16 @@ require_once 'inc/blade.php';
 //index.php?q=posts/show/2014/05/01	=> posts#show(2014,05,01)
 //index.php?q=posts/show/2014/05/01&page=1	=> posts#show(2014,05,01) and $_GET['page']
 
-
+/* Report all errors except E_NOTICE */
+error_reporting(E_ALL^E_NOTICE);
 
 $root_path = 'posts/';
 
-$q = $_REQUEST['q'];
-//unset($_REQUEST['q']);
+//$q = $_REQUEST['q'];
+unset($_REQUEST['q']);
 if (empty($q)) { $q = $root_path ;}; 
 
-list($controller,$action,$param) = split('/', $q);
+list($controller,$action,$param) = explode('/', $q);//看第一个参数，如果第一个参数不是正则表达式，split改为 explode；如果是正则表达式，split改为preg_split
 $action = empty($action) ? 'index' : $action ;
 
 //ucwords();
